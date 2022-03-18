@@ -70,6 +70,26 @@ return [
             'throw' => false,
         ],
 
+
+        'backup-local' => [
+            'driver' => 'local',
+            'root' => storage_path('backups'),
+        ],
+
+        'backup-spaces' => [
+            'driver' => 's3',
+            'key' => env('SPACES_ACCESS_KEY_ID'),
+            'secret' => env('SPACES_SECRET_ACCESS_KEY'),
+            'region' => env('SPACES_DEFAULT_REGION'),
+            'bucket' => env('SPACES_BUCKET'),
+            'root' => env('SPACES_ROOT', 'backups'),
+            'url' => env('SPACES_URL'),
+            'endpoint' => env('SPACES_ENDPOINT'),
+            'bucket_endpoint' => true,
+            'visibility' => 'private',
+            'throw' => false,
+        ],
+
     ],
 
     /*

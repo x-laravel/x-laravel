@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Storage;
 use MongoDB\Client as MongoClient;
 
 class Reinstall extends Command
@@ -29,6 +30,7 @@ class Reinstall extends Command
 
         $this->clearLogFiles();
         $this->clearStoreFiles();
+        $this->clearBackupFiles();
 
         $this->removeMongodbDatabases();
 
@@ -73,6 +75,18 @@ class Reinstall extends Command
             $disk->delete($item);
         })->count();
         $this->info($deleted . ' dosya silindi.');
+
+        $this->newLine();
+    }
+
+    private function clearBackupFiles(): void
+    {
+        $this->line('Uygulama yedek alanı temizleniyor...');
+
+        $deleted = collect(Storage::disk('backup-local')->allDirectories())->each(function ($item) {
+            Storage::disk('backup-local')->deleteDirectory($item);
+        })->count();
+        $this->info($deleted . ' klasör silindi.');
 
         $this->newLine();
     }

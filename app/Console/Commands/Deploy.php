@@ -95,7 +95,9 @@ class Deploy extends Command
         $this->sendLog('Uygulama yapılandırması en iyi hale getiriliyor...');
         $this->call('optimize');
         $this->call('cache:clear');
-        $this->call('lada-cache:flush');
+        if (config('lada-cache.active')) {
+            $this->call('lada-cache:flush');
+        }
     }
 
     private function migrate(): void
