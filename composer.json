@@ -1,14 +1,13 @@
 {
-    "name": "laravel/laravel",
+    "name": "example/web",
     "type": "project",
-    "description": "The Laravel Framework.",
+    "description": "Example Web Project",
     "keywords": [
-        "framework",
-        "laravel"
+        "web"
     ],
-    "license": "MIT",
+    "license": "proprietary",
     "require": {
-        "php": "^8.0.2",
+        "php": "^8.1.0",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^9.2",
         "laravel/sanctum": "^2.14.1",
@@ -59,6 +58,14 @@
         "preferred-install": "dist",
         "sort-packages": true
     },
+    "authors": [
+        {
+            "name": "Mehmet ÖĞMEN",
+            "email": "www@mehmetogmen.com.tr",
+            "homepage": "https://www.mehmetogmen.com.tr",
+            "role": "Developer"
+        }
+    ],
     "minimum-stability": "dev",
     "prefer-stable": true
 }
