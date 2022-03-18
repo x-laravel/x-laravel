@@ -10,7 +10,7 @@ Vagrant.configure("2") do |config|
 
 	# İnce ayarlar
 	config.vm.provider "virtualbox" do |vb|
-		vb.name = "local.example.com"
+		vb.name = "api.local.example.com"
 		vb.cpus = 1
 		vb.memory = 4096
 	end
@@ -20,7 +20,7 @@ Vagrant.configure("2") do |config|
 	    "TIMEZONE" => "Europe/Istanbul",
 	    "PHP_VERSION" => "8.1",
 	    "DOMAIN" => "example.com",
-	    "DIR" => "www",
+	    "DIR" => "api",
 	    "DB_PASSWORD" => "secret"
 	}
 
@@ -28,7 +28,7 @@ Vagrant.configure("2") do |config|
 	config.vm.provision "shell", run: "always", inline: <<-SHELL
 		service nginx reload;
 		rm -f /etc/supervisor/conf.d/*;
-		cp /var/www/example.com/www/config/workers/* /etc/supervisor/conf.d;
+		cp /var/www/example.com/api/config/workers/* /etc/supervisor/conf.d;
 		supervisorctl reread;
 		supervisorctl update;
 		supervisorctl restart all;

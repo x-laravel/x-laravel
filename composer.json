@@ -1,9 +1,9 @@
 {
-    "name": "example/web",
+    "name": "example/api",
     "type": "project",
-    "description": "Example Web Project",
+    "description": "Example Api Project",
     "keywords": [
-        "web"
+        "api"
     ],
     "license": "proprietary",
     "require": {
