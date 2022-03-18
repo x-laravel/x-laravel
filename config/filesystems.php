@@ -44,6 +44,20 @@ return [
             'throw' => false,
         ],
 
+        'spaces' => [
+            'driver' => 's3',
+            'key' => env('SPACES_ACCESS_KEY_ID'),
+            'secret' => env('SPACES_SECRET_ACCESS_KEY'),
+            'region' => env('SPACES_DEFAULT_REGION'),
+            'bucket' => env('SPACES_BUCKET'),
+            'root' => env('SPACES_ROOT', 'storage'),
+            'url' => env('SPACES_URL'),
+            'endpoint' => env('SPACES_ENDPOINT'),
+            'bucket_endpoint' => true,
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),
