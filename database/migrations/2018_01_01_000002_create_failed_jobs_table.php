@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
-    protected $connection = 'system';
+    protected $connection = 'queue';
     protected string $table = 'failed_jobs';
 
     public function up(): void
