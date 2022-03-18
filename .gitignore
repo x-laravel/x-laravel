@@ -2,3 +2,15 @@
 /.vagrant
 Vagrantfile
 nginx.conf
+/node_modules
+/vendor
+/public/hot
+/public/storage
+/public/mix-manifest.json
+/storage/*.key
+.env
+.phpunit.result.cache
+npm-debug.log
+yarn-error.log
+composer.lock
+yarn.lock

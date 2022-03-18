@@ -1,6 +1,6 @@
 # Example Projesi
 
-Example web projesidir.
+Laravel ile geliştirilen web projesidir.
 
 ## Kurulum
 
@@ -42,12 +42,44 @@ vagrant up
 
 Terminalde "Happy codings :)." yazısını görene kadar bekleyiniz.
 
+### Composer
+
+Vagrant kurulumu bittikten sonra aşağıdaki komut ile sanal makinenin terminaline geçiş yapınız:
+
+````
+vagrant ssh
+````
+
+Aşağıdaki komut ile sanal makine içinde proje dizinine geçiş yapınız:
+
+````
+cd /var/www/example.com/www
+````
+
+ve
+
+````
+composer i
+````
+
+komutu ile composer kurulumunu yapınız.
+
+### Laravel
+
+.env.example dosyasını kopyalayınız ve adını .env olarak değiştiriniz.
+
+Terminalde aşağıdaki komutu çalıştırarak uygulama anahtarını ayarlayınız:
+
+````
+php artisan key:generate
+````
+
 ## Final
 
 Eğer tüm aşamaları doğru şekilde yaptıysanız, internet
 tarayıcınızdan [http://local.example.com](http://local.example.com/)
-veya [http://www.local.example.com](http://www.local.example.com/) adresini açtığınızda "Hello World!" yazısını görmeniz
-gerekir.
+veya [http://www.local.example.com](http://www.local.example.com/) adresini açtığınızda Laravel'in karşılama sayfasını
+görmeniz gerekir.
 
-Eğer "Hello World!" yazısını görmüyorsanız bir şeyler yanlış gitmiş olabilir. Lütfen yaptığınız işlemlerin bu yönergede
-belirtilen adımları takip ettiğinden emin olunuz.
+Eğer Laravel'in karşılama sayfasını görmüyorsanız bir şeyler yanlış gitmiş olabilir. Lütfen yaptığınız işlemlerin bu
+yönergede belirtilen adımları takip ettiğinden emin olunuz.
