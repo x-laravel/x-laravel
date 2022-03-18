@@ -12,7 +12,8 @@
         "laravel/framework": "^9.2",
         "laravel/sanctum": "^2.14.1",
         "laravel/tinker": "^2.7",
-        "x-laravel/model-settings-bag": "^2.1"
+        "x-laravel/model-settings-bag": "^2.1",
+        "x-laravel/str-extend": "^1.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
