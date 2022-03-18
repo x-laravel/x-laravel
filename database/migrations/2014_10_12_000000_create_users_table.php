@@ -5,14 +5,12 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
+    protected $connection = 'system';
+    protected string $table = 'users';
+
+    public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::connection($this->connection)->create($this->table, function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
@@ -25,13 +23,8 @@ return new class extends Migration {
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
+    public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::connection($this->connection)->dropIfExists($this->table);
     }
 };

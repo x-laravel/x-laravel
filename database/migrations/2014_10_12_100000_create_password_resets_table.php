@@ -5,27 +5,20 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
+    protected $connection = 'system';
+    protected string $table = 'password_resets';
+
+    public function up(): void
     {
-        Schema::create('password_resets', function (Blueprint $table) {
+        Schema::connection($this->connection)->create($this->table, function (Blueprint $table) {
             $table->string('email')->index();
             $table->string('token');
             $table->timestamp('created_at', 6)->useCurrent();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
+    public function down(): void
     {
-        Schema::dropIfExists('password_resets');
+        Schema::connection($this->connection)->dropIfExists($this->table);
     }
 };
