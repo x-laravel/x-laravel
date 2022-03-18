@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\App;
+use MongoDB\Client as MongoClient;
 
 class Reinstall extends Command
 {
@@ -28,6 +29,8 @@ class Reinstall extends Command
 
         $this->clearLogFiles();
         $this->clearStoreFiles();
+
+        $this->removeMongodbDatabases();
 
         $this->removeMysqlDatabases();
         $this->installMysqlDatabases();
@@ -70,6 +73,32 @@ class Reinstall extends Command
             $disk->delete($item);
         })->count();
         $this->info($deleted . ' dosya silindi.');
+
+        $this->newLine();
+    }
+
+
+    private function getMongodbClient(array $database): MongoClient
+    {
+        return new MongoClient(sprintf('mongodb://%s:%d', $database['host'], $database['port']), [
+            'username' => $database['username'],
+            'password' => $database['password'],
+        ]);
+    }
+
+    private function removeMongodbDatabases(): void
+    {
+        $this->line('MongoDB veritabanları kaldırılıyor...');
+
+        $this->databases['mongodb'] = collect(config('database.connections'))->filter(function ($value) {
+            return $value['driver'] === 'mongodb';
+        })->toArray();
+
+        foreach ($this->databases['mongodb'] as $database) {
+            $this->warn($database['database']);
+            $client = $this->getMongodbClient($database);
+            $client->dropDatabase($database['database']);
+        }
 
         $this->newLine();
     }
