@@ -14,6 +14,7 @@
         "laravel/sanctum": "^2.14.1",
         "laravel/slack-notification-channel": "^2.4",
         "laravel/tinker": "^2.7",
+        "spatie/laravel-activitylog": "^4.4",
         "spiritix/lada-cache": "^5.2",
         "x-laravel/model-settings-bag": "^2.1",
         "x-laravel/str-extend": "^1.0",
