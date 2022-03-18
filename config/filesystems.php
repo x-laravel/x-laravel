@@ -14,6 +14,7 @@ return [
     */
 
     'default' => env('FILESYSTEM_DISK', 'local'),
+    'cdn_disk' => env('CDN_DISK', 'public'),
 
     /*
     |--------------------------------------------------------------------------
