@@ -1,0 +1,35 @@
+server {
+    listen 80;
+
+    server_name local.example.com www.local.example.com;
+
+    root /var/www/example.com/www/public;
+    index index.html index.htm index.php;
+
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    location ~ \.php$ {
+        fastcgi_pass unix:/var/run/php/php8.1-fpm.sock;
+        fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+        include fastcgi_params;
+    }
+
+    location /storage {
+        alias /var/www/example.com/www/storage/app/public;
+    }
+
+    location = /favicon.ico {access_log off; log_not_found off;}
+    location = /robots.txt  {access_log off; log_not_found off;}
+
+    location ~ /\.(?!well-known).* {
+        deny all;
+    }
+
+    include snippets/phpmyadmin.conf;
+
+    error_page 404 /index.php;
+
+    charset utf-8;
+}
