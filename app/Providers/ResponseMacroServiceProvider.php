@@ -84,13 +84,13 @@ class ResponseMacroServiceProvider extends ServiceProvider
             }
 
             $type = getCtrlToErrorType($controller);
-            $description = constant($controller . '::ERRORS')[$code];
+            $description = errorDescriptionTranslate($type, $code, constant($controller . '::ERRORS')[$code]);
 
-            return Response::ctrlError($type, $code, $description, $statusCode);
+            return Response::customError($type, $code, $description, $statusCode);
         });
 
-        Response::macro('ctrlError', function (string $type, int $code, string $description, int $statusCode) {
-            return Response::customError($type, $code, $description, $statusCode);
+        Response::macro('ctrlError', function (\App\Http\Controllers\Controller $controller, int $code, string $description, int $statusCode) {
+            return Response::customError(getCtrlToErrorType($controller::class), $code, $description, $statusCode);
         });
 
         Response::macro('customError', function (string $type, int $code, string $description, int $statusCode, array $detail = []) use ($prePare) {
