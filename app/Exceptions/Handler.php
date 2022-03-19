@@ -2,7 +2,13 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -32,10 +38,60 @@ class Handler extends ExceptionHandler
      *
      * @return void
      */
-    public function register()
+    public function register(): void
     {
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+    protected function unauthenticated($request, AuthenticationException $e): JsonResponse
+    {
+        $response = $this->convertExceptionToArray($e, 401);
+        $response['error']['description'] = $e->getMessage();
+        return response()->json($response, 401);
+    }
+
+    protected function convertValidationExceptionToResponse(ValidationException $e, $request): JsonResponse
+    {
+        return response()->validationError($e);
+    }
+
+    protected function shouldReturnJson($request, Throwable $e): bool
+    {
+        return true;
+    }
+
+    protected function convertExceptionToArray(Throwable $e, $code = 500): array
+    {
+        $response = [
+            'status' => false,
+            'error' => [
+                'type' => 'app',
+                'code' => $this->isHttpException($e) ? $e->getStatusCode() : $code,
+                'description' => $this->isHttpException($e) ? $e->getMessage() : trans('Server Error'),
+            ],
+            'elapsed_time' => microtime(true) - LARAVEL_START,
+        ];
+
+        if (config('app.debug')) {
+            $response['input'] = request()->all();
+            $response['queries'] = DB::getQueryLog();
+            $response['error'] = array_merge($response['error'], [
+                'description' => $e->getMessage(),
+                'exception' => get_class($e),
+                'file' => $e->getFile(),
+                'line' => $e->getLine(),
+                'trace' => collect($e->getTrace())->map(function ($trace) {
+                    return Arr::except($trace, ['args']);
+                })->all(),
+            ]);
+        }
+
+        if ($e::class === NotFoundHttpException::class) {
+            $response['error']['description'] = trans('Not Found');
+        }
+
+        return $response;
     }
 }

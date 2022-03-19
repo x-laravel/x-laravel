@@ -3,5 +3,8 @@
     "The :attribute must contain at least one number.": ":attribute en az bir sayı içermelidir.",
     "The :attribute must contain at least one symbol.": ":attribute en az bir sembol içermelidir.",
     "The :attribute must contain at least one uppercase and one lowercase letter.": ":attribute en az bir büyük harf ve bir küçük harf içermelidir.",
-    "The given :attribute has appeared in a data leak. Please choose a different :attribute.": "Verilen :attribute bir veri sızıntısında ortaya çıktı. Lütfen farklı bir :attribute seçin."
+    "The given :attribute has appeared in a data leak. Please choose a different :attribute.": "Verilen :attribute bir veri sızıntısında ortaya çıktı. Lütfen farklı bir :attribute seçin.",
+    "An unknown error occurred from which controller!": "Hangi kontrolörden geldiği bilinmeyen bir hata oluştu!",
+    "Error list not defined in controller!": "Kontrolörde hata listesi tanımlanmamış!",
+    "An undefined error code has been sent to the controller!": "Kontrolörde tanımlanmamış bir hata kodu gönderildi!"
 }
