@@ -74,6 +74,14 @@ Terminalde aşağıdaki komutu çalıştırarak uygulama anahtarını ayarlayın
 php artisan key:generate
 ````
 
+### Veritabanı
+
+Aşağıdaki komut ile veritabanının oluşturulmasını sağlayınız:
+
+````
+php artisan reinstall
+````
+
 ## Final
 
 Eğer tüm aşamaları doğru şekilde yaptıysanız, internet
