@@ -1,0 +1,248 @@
+{
+  "info": {
+    "_postman_id": "91cd7743-eaa6-454f-b97c-9f8ce7a7acc5",
+    "name": "restApi-sanctum",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Password",
+          "item": [
+            {
+              "name": "Forgot",
+              "item": [
+                {
+                  "name": "Index",
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "exec": [
+                          ""
+                        ],
+                        "type": "text/javascript"
+                      }
+                    }
+                  ],
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "urlencoded",
+                      "urlencoded": [
+                        {
+                          "key": "email",
+                          "value": "{{user.email}}",
+                          "type": "text"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{apiAddress}}/auth/password/forgot",
+                      "host": [
+                        "{{apiAddress}}"
+                      ],
+                      "path": [
+                        "auth",
+                        "password",
+                        "forgot"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Reset",
+                  "event": [
+                    {
+                      "listen": "prerequest",
+                      "script": {
+                        "exec": [
+                          ""
+                        ],
+                        "type": "text/javascript"
+                      }
+                    },
+                    {
+                      "listen": "test",
+                      "script": {
+                        "exec": [
+                          ""
+                        ],
+                        "type": "text/javascript"
+                      }
+                    }
+                  ],
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "urlencoded",
+                      "urlencoded": [
+                        {
+                          "key": "token",
+                          "value": "",
+                          "type": "text"
+                        },
+                        {
+                          "key": "email",
+                          "value": "{{user.email}}",
+                          "type": "text"
+                        },
+                        {
+                          "key": "password",
+                          "value": "{{user.password}}",
+                          "type": "text"
+                        },
+                        {
+                          "key": "password_confirmation",
+                          "value": "{{user.password}}",
+                          "type": "text"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{apiAddress}}/auth/password/forgot/reset",
+                      "host": [
+                        "{{apiAddress}}"
+                      ],
+                      "path": [
+                        "auth",
+                        "password",
+                        "forgot",
+                        "reset"
+                      ]
+                    }
+                  },
+                  "response": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const responseJson = pm.response.json();\r",
+                  "if(pm.response.status === 'OK') {\r",
+                  "    pm.environment.set('user.auth.accessToken', responseJson.data.access_token);\r",
+                  "} else {\r",
+                  "    pm.environment.set('user.auth.accessToken', null);\r",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "email",
+                  "value": "{{user.email}}",
+                  "type": "text"
+                },
+                {
+                  "key": "password",
+                  "value": "{{user.password}}",
+                  "type": "text"
+                },
+                {
+                  "key": "token_name",
+                  "value": "Samsung Galaxy Note 10",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{apiAddress}}/auth",
+              "host": [
+                "{{apiAddress}}"
+              ],
+              "path": [
+                "auth"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Me",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{user.auth.accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiAddress}}/auth",
+              "host": [
+                "{{apiAddress}}"
+              ],
+              "path": [
+                "auth"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Logout",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.environment.set('user.oauth.accessToken', null);\r",
+                  "pm.environment.set('user.oauth.refreshToken', null);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{user.auth.accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{apiAddress}}/auth",
+              "host": [
+                "{{apiAddress}}"
+              ],
+              "path": [
+                "auth"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,110 @@
+{
+  "id": "e1360ae2-0603-4ed2-80aa-7524fb1cd33a",
+  "name": "local",
+  "values": [
+    {
+      "key": "apiAddress",
+      "value": "http://api.local.example.com",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "tenantNo",
+      "value": "151903",
+      "enabled": true
+    },
+    {
+      "key": "user.email",
+      "value": "user@example.com",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "user.password",
+      "value": "password",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "user.auth.accessToken",
+      "value": "",
+      "type": "any",
+      "enabled": true
+    },
+    {
+      "key": "user.oauth.clientId",
+      "value": "8405ad7a-3db6-458b-9c2a-008bd8d6f5f6",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "user.oauth.clientSecret",
+      "value": "0MmKCuHM4DutaurlbxJTbV3dEb30Zo9NdFdkJwM4",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "user.oauth.accessToken",
+      "value": "",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "user.oauth.refreshToken",
+      "value": "",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": ".----------_----------.",
+      "value": "",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "admin.email",
+      "value": "admin@example.com",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "admin.password",
+      "value": "password",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "admin.auth.accessToken",
+      "value": "",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "admin.oauth.clientId",
+      "value": "95d82d18-b1bc-413f-9786-16e04742ee23",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "admin.oauth.clientSecret",
+      "value": "4KvPYVU8k0iRnYHjAl9TvHmwX3axg4boFrXSrTXk",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "admin.oauth.accessToken",
+      "value": "",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "admin.oauth.refreshToken",
+      "value": "",
+      "type": "default",
+      "enabled": true
+    }
+  ],
+  "_postman_variable_scope": "environment",
+  "_postman_exported_at": "2022-03-21T10:00:35.535Z",
+  "_postman_exported_using": "Postman/9.14.14"
+}
