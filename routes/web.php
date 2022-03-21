@@ -16,19 +16,3 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::prefix('auth')->name('auth.')->group(function () {
-    Route::prefix('password')->name('password.')->group(function () {
-        Route::prefix('forgot')->name('forgot.')->group(function () {
-            Route::post('', [\App\Http\Controllers\Auth\Password\ForgotCTRL::class, 'forgot'])->name('index');
-            Route::post('/reset', [\App\Http\Controllers\Auth\Password\ForgotCTRL::class, 'reset'])->name('reset');
-        });
-    });
-});
-
-Route::middleware('auth:users')->group(function () {
-    Route::prefix('auth')->name('auth.')->group(function () {
-        Route::get('', [\App\Http\Controllers\Auth\IndexCTRL::class, 'me'])->name('index');
-        Route::delete('', [\App\Http\Controllers\Auth\IndexCTRL::class, 'logout'])->name('logout');
-    });
-});
