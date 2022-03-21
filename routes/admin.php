@@ -6,7 +6,6 @@ Route::prefix('auth')->name('auth.')->group(function () {
     Route::prefix('password')->name('password.')->group(function () {
         Route::prefix('forgot')->name('forgot.')->group(function () {
             Route::post('', [\App\Http\Controllers\Admin\Auth\Password\ForgotCTRL::class, 'forgot'])->name('index');
-
             Route::post('/reset', [\App\Http\Controllers\Admin\Auth\Password\ForgotCTRL::class, 'reset'])->name('reset');
         });
     });

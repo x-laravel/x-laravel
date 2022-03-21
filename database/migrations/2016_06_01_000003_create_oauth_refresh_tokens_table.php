@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
-    protected $connection = 'auth';
+    protected $connection = 'system';
     protected string $table = 'oauth_refresh_tokens';
 
     public function up(): void

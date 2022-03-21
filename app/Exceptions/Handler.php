@@ -8,6 +8,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
+use Stancl\Tenancy\Exceptions\TenantCouldNotBeIdentifiedByRequestDataException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
@@ -90,6 +91,8 @@ class Handler extends ExceptionHandler
 
         if ($e::class === NotFoundHttpException::class) {
             $response['error']['description'] = trans('Not Found');
+        } else if ($e::class === TenantCouldNotBeIdentifiedByRequestDataException::class) {
+            $response['error']['description'] = trans('Tenant Not Found');
         }
 
         return $response;

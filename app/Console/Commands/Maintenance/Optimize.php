@@ -16,10 +16,11 @@ class Optimize extends Command
         $this->line('Optimizasyon başlatılıyor...');
 
         $this->line('Sistem önyükleme dosyalarını önbelleğe alınıyor...');
-        $this->call('optimize');
+        $this->call('config:cache');
 
         $this->line('Veritabanı en iyi hale gelitiriliyor...');
         $this->systemDatabasesOptimize();
+        $this->tenantDatabasesOptimize();
 
         $this->info('Optimizasyon tamamlandı!');
     }
@@ -36,6 +37,19 @@ class Optimize extends Command
         foreach ($databases as $connectionName => $database) {
             $progress->advance();
             $this->databaseOptimize(DB::connection($connectionName), $database['database']);
+        }
+
+        $this->newLine();
+    }
+
+    protected function tenantDatabasesOptimize(): void
+    {
+        $this->line('Tenant veritabanları en iyi hale getiriliyor...');
+        $progress = $this->output->createProgressBar(config('tenancy.tenant_model')::count());
+        foreach (config('tenancy.tenant_model')::get() as $tenant) {
+            $progress->advance();
+            tenancy()->initialize($tenant);
+            $this->databaseOptimize(DB::connection('tenant'), $tenant->tenancy_db_name);
         }
 
         $this->newLine();

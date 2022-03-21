@@ -6,13 +6,13 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
-    protected $connection = 'system';
+    protected $connection = 'tenant';
     protected string $table = 'oauth_clients';
 
     protected array $columns = ['id', 'user_id', 'name', 'secret', 'provider', 'redirect', 'personal_access_client', 'password_client', 'revoked', 'created_at'];
     protected array $data = [
-        ['95ddfb0a-4fa1-4b8a-b3f8-afa2809e0f8e', null, 'Example Personal Access Client', 'otsaNMvQNeq7FF6INCDwiLAQLyOXPjmmUNthCl9F', null, 'http://localhost', 1, 0, 0, '2016-01-01 00:00:00'],
-        ['95d82d18-b1bc-413f-9786-16e04742ee23', null, 'Example Admin Password Grant Client', '4KvPYVU8k0iRnYHjAl9TvHmwX3axg4boFrXSrTXk', 'admins', 'http://localhost', 0, 1, 0, '2016-01-01 00:00:01'],
+        ['8405ad7a-2fb9-4a43-b5c2-e583d02de966', null, 'Example Panel Personal Access Client', 'zaNzb67PclLJ2nRfgkckoUfvJbIeSYJPqwIzhIHv', null, 'http://localhost', 1, 0, 0, '2016-01-01 00:00:00'],
+        ['8405ad7a-3db6-458b-9c2a-008bd8d6f5f6', null, 'Example Panel Admin Password Grant Client', '0MmKCuHM4DutaurlbxJTbV3dEb30Zo9NdFdkJwM4', 'users', 'http://localhost', 0, 1, 0, '2016-01-01 00:00:01'],
     ];
 
 

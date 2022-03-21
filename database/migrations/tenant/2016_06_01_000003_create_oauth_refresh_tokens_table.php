@@ -5,16 +5,14 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
-    protected $connection = 'system';
-    protected string $table = 'oauth_auth_codes';
+    protected $connection = 'tenant';
+    protected string $table = 'oauth_refresh_tokens';
 
     public function up(): void
     {
         Schema::connection($this->connection)->create($this->table, function (Blueprint $table) {
             $table->string('id', 100)->primary();
-            $table->unsignedBigInteger('user_id')->index();
-            $table->uuid('client_id');
-            $table->text('scopes')->nullable();
+            $table->string('access_token_id', 100)->index();
             $table->boolean('revoked');
             $table->dateTime('expires_at', 6)->nullable();
         });

@@ -66,7 +66,7 @@ return [
     | there like in the following example:
     |
     | 'include-tables' => [
-    |     (new \App\Models\System\User())->getTable(),
+    |     (new \App\Models\System\Admin())->getTable(),
     |     (new \App\Models\Post())->getTable(),
     | ],
     |

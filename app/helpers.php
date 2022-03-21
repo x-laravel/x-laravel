@@ -25,3 +25,18 @@ if (!function_exists('errorDescriptionTranslate')) {
         return $translateDescription !== $errorKey ? $translateDescription : $description;
     }
 }
+
+if (!function_exists('scramble')) {
+    function scramble(int $number): int
+    {
+        return (((0x00FF & $number) << 8) + ((0xFF00 & $number) >> 8)) + 151647;
+    }
+}
+
+if (!function_exists('unscramble')) {
+    function unscramble(int $number): int
+    {
+        $number = $number - 151647;
+        return (((0x00FF & $number) << 8) + ((0xFF00 & $number) >> 8));
+    }
+}

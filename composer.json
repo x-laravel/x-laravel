@@ -20,6 +20,7 @@
         "spatie/laravel-activitylog": "^4.4",
         "spatie/laravel-backup": "^8.1",
         "spiritix/lada-cache": "^5.2",
+        "stancl/tenancy": "^3.5",
         "x-laravel/model-settings-bag": "^2.1",
         "x-laravel/str-extend": "^1.0",
         "x-laravel/str-tr-extend": "^1.0",

@@ -6,12 +6,12 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
-    protected $connection = 'system';
+    protected $connection = 'tenant';
     protected string $table = 'oauth_personal_access_clients';
 
     protected array $columns = ['id', 'client_id', 'created_at'];
     protected array $data = [
-        [1, '95ddfb0a-4fa1-4b8a-b3f8-afa2809e0f8e', '2016-01-01 00:00:00'],
+        [1, '95d82d18-a720-4edb-ae1c-3b0dd06b544d', '2016-01-01 00:00:00'],
     ];
 
 

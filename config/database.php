@@ -67,12 +67,12 @@ return [
             ]) : [],
         ],
 
-        'auth' => [
+        'system' => [
             'driver' => 'mysql',
             'url' => env('DATABASE_URL'),
             'host' => env('DB_HOST', '127.0.0.1'),
             'port' => env('DB_PORT', '3306'),
-            'database' => 'auth',
+            'database' => 'system',
             'username' => env('DB_USERNAME', 'dba'),
             'password' => env('DB_PASSWORD', 'secret'),
             'unix_socket' => env('DB_SOCKET', ''),
@@ -87,12 +87,12 @@ return [
             ]) : [],
         ],
 
-        'system' => [
+        'tenant' => [
             'driver' => 'mysql',
             'url' => env('DATABASE_URL'),
             'host' => env('DB_HOST', '127.0.0.1'),
             'port' => env('DB_PORT', '3306'),
-            'database' => 'system',
+            'database' => 'tenant',
             'username' => env('DB_USERNAME', 'dba'),
             'password' => env('DB_PASSWORD', 'secret'),
             'unix_socket' => env('DB_SOCKET', ''),

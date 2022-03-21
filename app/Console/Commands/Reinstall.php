@@ -34,6 +34,7 @@ class Reinstall extends Command
 
         $this->removeMongodbDatabases();
 
+        $this->removeTenantDatabases();
         $this->removeMysqlDatabases();
         $this->installMysqlDatabases();
         $this->migration();
@@ -121,6 +122,27 @@ class Reinstall extends Command
     private function getMysqlClient(array $database): \PDO
     {
         return new \PDO(sprintf('mysql:host=%s;port=%d;', $database['host'], $database['port']), $database['username'], $database['password']);
+    }
+
+    private function removeTenantDatabases(): void
+    {
+        $this->line('Tenant veritabanları kaldırılıyor...');
+
+        $pdo = $this->getMysqlClient(collect(config('database.connections'))['system']);
+        $databases = $pdo->query('SHOW DATABASES')->fetchAll(\PDO::FETCH_ASSOC);
+
+        $tenantDatabases = collect($databases)->filter(function ($item) {
+            return false !== stristr($item['Database'], 'tenant_');
+        });
+
+        $pdo->exec('SET foreign_key_checks = 0');
+        foreach ($tenantDatabases as $database) {
+            $this->warn($database['Database']);
+            $pdo->exec('SET foreign_key_checks = 0');
+            $pdo->exec('DROP DATABASE IF EXISTS `' . $database['Database'] . '`');
+        }
+
+        $this->newLine();
     }
 
     private function removeMysqlDatabases(): void
