@@ -24,7 +24,8 @@
         "x-laravel/model-settings-bag": "^2.1",
         "x-laravel/str-extend": "^1.0",
         "x-laravel/str-tr-extend": "^1.0",
-        "x-laravel/validation-extend": "^1.0"
+        "x-laravel/validation-extend": "^1.0",
+        "yajra/laravel-datatables-oracle": "^9.19"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
