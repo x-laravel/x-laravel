@@ -9,6 +9,7 @@ nginx.conf
 /public/mix-manifest.json
 /storage/*.key
 .env
+.rnd
 .phpunit.result.cache
 npm-debug.log
 yarn-error.log

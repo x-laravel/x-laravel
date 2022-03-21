@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Laravel\Passport\Passport;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -24,6 +25,12 @@ class AuthServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->registerPolicies();
+
+        Passport::ignoreMigrations();
+        if (!$this->app->routesAreCached()) {
+            Passport::routes();
+        }
+        Passport::loadKeysFrom(storage_path('secrets/oauth'));
 
         ResetPassword::createUrlUsing(function ($notifiable, string $token) {
             $url = url(route('auth.password.forgot.reset', [

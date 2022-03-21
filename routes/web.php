@@ -25,3 +25,10 @@ Route::prefix('auth')->name('auth.')->group(function () {
         });
     });
 });
+
+Route::middleware('auth:users')->group(function () {
+    Route::prefix('auth')->name('auth.')->group(function () {
+        Route::get('', [\App\Http\Controllers\Auth\IndexCTRL::class, 'me'])->name('index');
+        Route::delete('', [\App\Http\Controllers\Auth\IndexCTRL::class, 'logout'])->name('logout');
+    });
+});

@@ -82,6 +82,15 @@ Aşağıdaki komut ile veritabanının oluşturulmasını sağlayınız:
 php artisan reinstall
 ````
 
+### Laravel Passport
+
+Laravel ve gerekli paketlerin kurulmasının ardından aşağıdaki komutu çalıştırarak Passport'un erişim belirteçleri
+oluşturmak için ihtiyaç duyduğu şifreleme anahtarlarını oluşturunuz:
+
+````
+php artisan passport:keys
+````
+
 ## Final
 
 Eğer tüm aşamaları doğru şekilde yaptıysanız, internet
