@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Auth\Password;
+namespace App\Http\Controllers\User\Auth\Password;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\Password\Forgot\IndexRequest;
-use App\Http\Requests\Auth\Password\Forgot\ResetRequest;
+use App\Http\Requests\User\Auth\Password\Forgot\IndexRequest;
+use App\Http\Requests\User\Auth\Password\Forgot\ResetRequest;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
@@ -14,7 +14,7 @@ class ForgotCTRL extends Controller
 {
     public function forgot(IndexRequest $request): \Illuminate\Http\JsonResponse
     {
-        $status = Password::sendResetLink(
+        $status = Password::broker('users')->sendResetLink(
             $request->only('email')
         );
 
@@ -27,7 +27,7 @@ class ForgotCTRL extends Controller
 
     public function reset(ResetRequest $request): \Illuminate\Http\JsonResponse
     {
-        $status = Password::reset(
+        $status = Password::broker('users')->reset(
             $request->only('email', 'password', 'password_confirmation', 'token'),
             function ($user, $password) use ($request) {
                 $user->forceFill(['password' => Hash::make($password)])->save();

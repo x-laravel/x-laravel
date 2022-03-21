@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
     protected $connection = 'system';
-    protected string $table = 'password_resets';
+    protected string $table = 'user_password_resets';
 
     public function up(): void
     {

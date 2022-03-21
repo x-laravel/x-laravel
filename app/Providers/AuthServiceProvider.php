@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\System\Admin;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Laravel\Passport\Passport;
@@ -28,16 +29,25 @@ class AuthServiceProvider extends ServiceProvider
 
         Passport::ignoreMigrations();
         if (!$this->app->routesAreCached()) {
-            Passport::routes();
+            Passport::routes(null, ['prefix' => 'admin/oauth']);
+            Passport::routes(null, ['prefix' => 'user/oauth', 'middleware' => 'tenant']);
         }
         Passport::loadKeysFrom(storage_path('secrets/oauth'));
 
         ResetPassword::createUrlUsing(function ($notifiable, string $token) {
-            $url = url(route('auth.password.forgot.reset', [
+            if (Admin::class === get_class($notifiable)) {
+                $url = url(route('admin.auth.password.forgot.reset', [
+                    'token' => $token,
+                    'email' => $notifiable->getEmailForPasswordReset(),
+                ], false));
+                return str_replace(config('app.url') . '/admin', config('app.admin_panel_url'), $url);
+            }
+
+            $url = url(route('user.auth.password.forgot.reset', [
                 'token' => $token,
                 'email' => $notifiable->getEmailForPasswordReset(),
             ], false));
-            return str_replace(config('app.url'), config('app.web_url'), $url);
+            return str_replace(config('app.url') . '/user', config('app.user_panel_url'), $url);
         });
     }
 }
