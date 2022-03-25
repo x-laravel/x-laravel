@@ -1,9 +1,10 @@
 <?php
 
-namespace Database\Factories\System;
+namespace Database\Factories\Tenant;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+use function now;
 
 class UserFactory extends Factory
 {
