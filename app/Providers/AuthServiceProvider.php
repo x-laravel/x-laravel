@@ -19,8 +19,6 @@ class AuthServiceProvider extends ServiceProvider
 
     /**
      * Register any authentication / authorization services.
-     *
-     * @return void
      */
     public function boot(): void
     {
@@ -28,7 +26,7 @@ class AuthServiceProvider extends ServiceProvider
 
         Passport::ignoreMigrations();
         if (!$this->app->routesAreCached()) {
-            Passport::routes();
+//            Passport::routes();
         }
         Passport::loadKeysFrom(storage_path('secrets/oauth'));
 

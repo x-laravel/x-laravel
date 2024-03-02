@@ -2,7 +2,7 @@
 
 namespace App\Models\Log;
 
-use Jenssegers\Mongodb\Eloquent\Model;
+use MongoDB\Laravel\Eloquent\Model;
 
 class HttpLog extends Model
 {
